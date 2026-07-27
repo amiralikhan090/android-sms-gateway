@@ -21,6 +21,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
     - name: Setup Gradle 8.4
       uses: gradle/actions/setup-gradle@v4
       with:
@@ -28,7 +31,7 @@ jobs:
         cache-disabled: true
 
     - name: Build APK with Gradle
-      run: gradle assembleDebug --no-daemon
+      run: gradle assembleDebug --stacktrace
 
     - name: Upload Downloadable APK Artifact
       uses: actions/upload-artifact@v4
