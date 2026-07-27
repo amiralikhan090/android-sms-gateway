@@ -21,6 +21,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Setup Gradle 8.4
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.4'
+        cache-disabled: true
+
     - name: Fix Linux Line Endings & Permissions
       run: |
         sed -i 's/\r$//' gradlew
