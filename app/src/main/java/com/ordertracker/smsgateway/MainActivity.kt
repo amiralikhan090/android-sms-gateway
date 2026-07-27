@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate()
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         tvStatus = findViewById(R.id.tvStatus)
@@ -94,9 +94,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUiState() {
         val ip = SmsServerService.getLocalIpAddress()
-        val isRunning = SmsServerService.isRunning
+        val running = SmsServerService.isRunning
 
-        if (isRunning) {
+        if (running) {
             tvStatus.text = "🟢 RUNNING"
             tvStatus.setTextColor(Color.parseColor("#10B981"))
             tvServerUrl.text = "URL: http://$ip:${SmsServerService.activePort}"
@@ -115,9 +115,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAndRequestPermissions(): Boolean {
         val permissions = mutableListOf(
-            Manifest.permission.SEND_SMS,
-            Manifest.permission.INTERNET,
-            Manifest.permission.WAKE_LOCK
+            Manifest.permission.SEND_SMS
         )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -142,7 +140,7 @@ class MainActivity : AppCompatActivity() {
             if (allGranted) {
                 Toast.makeText(this, "Permissions Granted!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "SEND_SMS permission is required to send SMS!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "SEND_SMS permission is required!", Toast.LENGTH_LONG).show()
             }
         }
     }
