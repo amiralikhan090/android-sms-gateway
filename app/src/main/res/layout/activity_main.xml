@@ -9,83 +9,236 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="20dp">
 
+        <!-- Title Banner -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📱 Order Tracker SMS"
+            android:text="📱 Order Tracker SMS Gateway"
             android:textColor="#38BDF8"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Embedded Local Ktor SMS Gateway"
+            android:text="Production 24/7 Service • Order Tracker"
             android:textColor="#94A3B8"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
-            android:background="#334155" />
-
-        <!-- Status Card -->
+        <!-- Permission Warning Banner -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPermissionWarning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#1E293B"
-            app:cardCornerRadius="12dp"
-            app:strokeColor="#38BDF8"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#7F1D1D"
+            app:cardCornerRadius="10dp"
+            app:strokeColor="#EF4444"
             app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="14dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gateway Status"
-                    android:textColor="#94A3B8"
-                    android:textSize="13sp" />
+                    android:text="⚠️ Permission Required"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="⚪ STOPPED"
-                    android:textColor="#EF4444"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:text="SEND_SMS permission is disabled. Tap to grant permission to allow SMS dispatch."
+                    android:textColor="#FCA5A5"
+                    android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/tvServerUrl"
+                <Button
+                    android:id="@+id/btnGrantPermission"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="URL: http://192.168.0.x:8080"
-                    android:textColor="#F8FAFC"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#EF4444"
+                    android:text="Grant Permission"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- API Key & Settings Card -->
+        <!-- 4 Statistics Cards Grid (Green, Yellow, Red, Blue) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <!-- Green Status Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#064E3B"
+                app:cardCornerRadius="10dp"
+                app:strokeColor="#10B981"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:textColor="#A7F3D0"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvCardStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="🟢 RUNNING"
+                        android:textColor="#10B981"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Yellow Queue Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#78350F"
+                app:cardCornerRadius="10dp"
+                app:strokeColor="#F59E0B"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Queue / Pending"
+                        android:textColor="#FDE68A"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvCardQueue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0 Pending"
+                        android:textColor="#F59E0B"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <!-- Red Errors Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#7F1D1D"
+                app:cardCornerRadius="10dp"
+                app:strokeColor="#EF4444"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Failed Today"
+                        android:textColor="#FCA5A5"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvCardFailed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0 Failed"
+                        android:textColor="#EF4444"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Blue Statistics Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#1E3A8A"
+                app:cardCornerRadius="10dp"
+                app:strokeColor="#3B82F6"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Today's Total"
+                        android:textColor="#BFDBFE"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvCardTotalSent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0 Sent"
+                        android:textColor="#60A5FA"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- SIM Info Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardBackgroundColor="#1E293B"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="10dp"
             app:strokeColor="#334155"
             app:strokeWidth="1dp">
 
@@ -93,14 +246,68 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="14dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Server Port"
-                    android:textColor="#94A3B8"
+                    android:text="📶 SIM & Network Info"
+                    android:textColor="#38BDF8"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSimDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Carrier: Jazz | Slot: 1 | Signal: Excellent"
+                    android:textColor="#F8FAFC"
                     android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvServerUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="URL: http://192.168.1.5:8080"
+                    android:textColor="#10B981"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Settings Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#1E293B"
+            app:cardCornerRadius="10dp"
+            app:strokeColor="#334155"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚙️ Production Settings"
+                    android:textColor="#F59E0B"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Gateway Port"
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/etPort"
@@ -108,18 +315,18 @@
                     android:layout_height="wrap_content"
                     android:background="#0F172A"
                     android:inputType="number"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:text="8080"
                     android:textColor="#F8FAFC"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
                     android:text="Secret API Key"
                     android:textColor="#94A3B8"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/etApiKey"
@@ -127,31 +334,71 @@
                     android:layout_height="wrap_content"
                     android:background="#0F172A"
                     android:inputType="textPassword"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:text="MY_SECRET_API_KEY_123"
-
                     android:textColor="#F8FAFC"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Allowed IP Subnet (Whitelist)"
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etIpSubnet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#0F172A"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:text="192.168."
+                    android:textColor="#F8FAFC"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Auto Start on Phone Reboot"
+                        android:textColor="#F8FAFC"
+                        android:textSize="13sp" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchAutoStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+                </LinearLayout>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Start / Stop Action Buttons -->
+        <!-- Start / Stop / Export Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnStart"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#10B981"
-                android:padding="14dp"
-                android:text="▶ START SERVER"
+                android:padding="12dp"
+                android:text="▶ START"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -159,26 +406,39 @@
                 android:id="@+id/btnStop"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#EF4444"
-                android:padding="14dp"
-                android:text="⏹ STOP SERVER"
+                android:padding="12dp"
+                android:text="⏹ STOP"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnExportCsv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="#3B82F6"
+                android:padding="12dp"
+                android:text="📁 EXPORT CSV"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Stats Log -->
+        <!-- Logs View -->
         <TextView
             android:id="@+id/tvLogs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:background="#0F172A"
-            android:padding="14dp"
+            android:padding="12dp"
             android:text="Logs:\n• Ready to start SMS Gateway service."
             android:textColor="#94A3B8"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 </ScrollView>
