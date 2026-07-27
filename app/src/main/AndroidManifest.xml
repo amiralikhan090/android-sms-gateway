@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Required Permissions -->
+    <uses-permission android.permission.SEND_SMS />
+    <uses-permission android.permission.INTERNET />
+    <uses-permission android.permission.ACCESS_NETWORK_STATE />
+    <uses-permission android.permission.ACCESS_WIFI_STATE />
+    <uses-permission android.permission.WAKE_LOCK />
+    <uses-permission android.permission.FOREGROUND_SERVICE />
+    <uses-permission android.permission.FOREGROUND_SERVICE_SPECIAL_USE />
+    <uses-permission android.permission.POST_NOTIFICATIONS />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Order Tracker SMS"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.OrderTrackerSMS"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.OrderTrackerSMS">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".SmsServerService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Embedded Local HTTP Gateway for Order Tracker SMS Dispatch" />
+        </service>
+    </application>
+
+</manifest>
