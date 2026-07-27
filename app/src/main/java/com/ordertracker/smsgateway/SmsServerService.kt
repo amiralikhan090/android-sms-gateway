@@ -21,6 +21,14 @@ import java.net.Inet4Address
 import java.net.NetworkInterface
 import java.util.Date
 
+data class SmsRequest(
+    val api_key: String? = null,
+    val apiKey: String? = null,
+    val phone: String? = null,
+    val phoneNumber: String? = null,
+    val message: String? = null
+)
+
 data class BulkSmsRequest(
     val api_key: String? = null,
     val apiKey: String? = null,
@@ -32,6 +40,7 @@ data class BulkSmsRequest(
 data class TestSmsRequest(
     val phone: String? = null
 )
+
 
 class SmsServerService : Service() {
 

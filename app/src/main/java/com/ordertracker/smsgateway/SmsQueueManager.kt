@@ -66,7 +66,8 @@ class SmsQueueManager(private val context: Context, private val db: SmsDatabase)
         }
     }
 
-    private async suspend fun processItem(item: SmsQueueItem) {
+    private suspend fun processItem(item: SmsQueueItem) {
+
         val startTime = System.currentTimeMillis()
         var attempt = 0
         var success = false
