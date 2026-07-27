@@ -7,7 +7,8 @@ workflows:
     scripts:
       - name: Build Android APK
         script: |
-          sed -i 's/\r//' gradlew
+          tr -d '\r' < gradlew > gradlew.tmp
+          mv gradlew.tmp gradlew
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace
     artifacts:
